@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import ImagePicker from "react-native-image-picker";
+import axios from 'axios';
 
 const Unsigned = (props) => {
   const {
@@ -46,18 +47,21 @@ const Unsigned = (props) => {
       }
     });
   };
-  const cloudinaryUpload = (photo) => {
-    onUploadingStart("uploading");
 
+  const cloudinaryUpload = (photo) => {
+    onUploadingStart("uploading started");
+    const config = {
+      onUploadProgress: function (progressEvent) {
+        var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+        console.log(percentCompleted)
+      }
+    }
     const data = new FormData();
     data.append("file", photo);
     data.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
     data.append("cloud_name", CLOUDINARY_CLOUD_NAME);
-    fetch(CLOUDINARY_URL, {
-      method: "post",
-      body: data,
-    })
-      .then((res) => res.json())
+
+    axios.post(CLOUDINARY_URL, data, config)
       .then((data) => {
         onSuccess(data);
       })

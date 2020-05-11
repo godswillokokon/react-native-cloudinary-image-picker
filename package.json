@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/react-native-nigeria-community/react-native-cloudinary-image-picker/issues"
   },
-  "homepage": "https://github.com/react-native-nigeria-community/react-native-cloudinary-image-picker#readme"
+  "homepage": "https://github.com/react-native-nigeria-community/react-native-cloudinary-image-picker#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }
